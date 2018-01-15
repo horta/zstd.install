@@ -61,4 +61,5 @@ if type "ldconfig" >/dev/null 2>&1; then
     silent_run do_then_sudo ldconfig
 fi
 
+cat "$logfile"
 rm "$logfile" || true
