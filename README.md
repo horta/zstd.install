@@ -4,7 +4,7 @@
 
 Windows, macOS, and Linux one-line installers for zstandard library.
 
-# usage
+# Usage
 
 For Windows
 
