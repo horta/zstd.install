@@ -24,7 +24,7 @@ build_script:
     - install.bat
 
 test_script:
-    - dir "%programfiles%"
-    - dir "%programfiles%\zstd"
-    - dir "%programfiles%\zstd\lib"
-    - dir "%programfiles%\zstd\include"
+    - if NOT exist "%programfiles%\zstd\lib\zstd.lib" exit 1
+    - if NOT exist "%programfiles%\zstd\lib\zstd_static.lib" exit 1
+    - if NOT exist "%programfiles%\zstd\include\zstd.h" exit 1
+    - if NOT exist "%programfiles%\zstd\include\zstd_errors.h" exit 1
