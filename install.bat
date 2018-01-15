@@ -1,21 +1,12 @@
 @echo off
 
 :: Configuration
-set VERSION=1.3.2
+set VERSION=1.3.3
 set FILE=zstd-%VERSION%.zip
 set DIR=zstd-%VERSION%
 set URL=https://github.com/facebook/zstd/archive/v%VERSION%.zip
 
 echo [0/5] Library(zstd==%VERSION%)
-
-:: Ancient Windows don't support TLS 1.1 and 1.2, so we fall back to insecure download.
-set Version=
-for /f "skip=1" %%v in ('wmic os get version') do if not defined Version set Version=%%v
-for /f "delims=. tokens=1-3" %%a in ("%Version%") do (
-  set Version.Major=%%a
-  set Version.Minor=%%b
-  set Version.Build=%%c
-)
 
 SET ORIGIN=%cd%
 SET LOG_FILE=%ORIGIN%\install.log
