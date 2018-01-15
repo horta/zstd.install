@@ -1,0 +1,28 @@
+os:
+- linux
+- osx
+dist: trusty
+sudo: false
+language: c
+compiler:
+- clang
+- gcc
+script:
+- mkdir build && pushd build
+- bash <(curl -fsSL https://raw.githubusercontent.com/horta/zstd.install/master/install)
+- popd && rm -rf build
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then test -e $TRAVIS_BUILD_DIR/lib/libathr.so; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then test -e $TRAVIS_BUILD_DIR/lib/libathr_static.a; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e $TRAVIS_BUILD_DIR/lib/libathr.dylib; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e $TRAVIS_BUILD_DIR/lib/libathr_static.a; fi
+after_success:
+- mkdir dist && pushd dist && cmake .. -DCMAKE_BUILD_TYPE=Release && popd
+- mv dist athr-`cat VERSION`
+- tar czf athr-`cat VERSION`.tar.gz athr-`cat VERSION`
+- rm -rf dist
+notifications:
+  email:
+    recipients:
+    - danilo.horta@gmail.com
+    on_success: never
+    on_failure: always
