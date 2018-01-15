@@ -20,10 +20,14 @@ script:
     - ls /usr/local
     - ls /usr/local/lib
     - ls /usr/local/include
-    # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then test -e $TRAVIS_BUILD_DIR/lib/libathr.so; fi
-    # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then test -e $TRAVIS_BUILD_DIR/lib/libathr_static.a; fi
-    # - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e $TRAVIS_BUILD_DIR/lib/libathr.dylib; fi
-    # - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e $TRAVIS_BUILD_DIR/lib/libathr_static.a; fi
+    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then test -e /usr/local/include/zstd_errors.h; fi
+    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then test -e /usr/local/include/zstd.h; fi
+    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then test -e /usr/local/lib/libzstd.a; fi
+    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then test -e /usr/local/lib/libzstd.so; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e /usr/local/include/zstd_errors.h; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e /usr/local/include/zstd.h; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e /usr/local/lib/libzstd.a; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e /usr/local/lib/libzstd.so; fi
 
 notifications:
   email:
