@@ -1,5 +1,5 @@
 dist: trusty
-sudo: false
+sudo: required
 language: c
 
 os:
@@ -14,10 +14,10 @@ script:
     - mkdir build && pushd build
     - bash <(curl -fsSL https://raw.githubusercontent.com/horta/zstd.install/master/install)
     - popd && rm -rf build
-    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then test -e $TRAVIS_BUILD_DIR/lib/libathr.so; fi
-    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then test -e $TRAVIS_BUILD_DIR/lib/libathr_static.a; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e $TRAVIS_BUILD_DIR/lib/libathr.dylib; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e $TRAVIS_BUILD_DIR/lib/libathr_static.a; fi
+    # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then test -e $TRAVIS_BUILD_DIR/lib/libathr.so; fi
+    # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then test -e $TRAVIS_BUILD_DIR/lib/libathr_static.a; fi
+    # - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e $TRAVIS_BUILD_DIR/lib/libathr.dylib; fi
+    # - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e $TRAVIS_BUILD_DIR/lib/libathr_static.a; fi
 
 notifications:
   email:
