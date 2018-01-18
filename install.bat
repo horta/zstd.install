@@ -29,7 +29,7 @@ if %ERRORLEVEL% NEQ 0 (echo FAILED. && type %LOG_FILE% && exit /B 1) else (echo 
 cd %DIR%\build\cmake && mkdir build && cd build
 
 echo|set /p="[3/4] Configuring... "
-cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="%programfiles%\zstd" .. >>%LOG_FILE% 2>&1
+cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DCMAKE_INSTALL_PREFIX="%programfiles%\zstd" .. >>%LOG_FILE% 2>&1
 if %ERRORLEVEL% NEQ 0 (echo FAILED. && type %LOG_FILE% && exit /B 1) else (echo done.)
 
 echo|set /p="[4/4] Compiling and installing... "
