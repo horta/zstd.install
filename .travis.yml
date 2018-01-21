@@ -21,7 +21,7 @@ script:
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e /usr/local/include/zstd_errors.h; fi
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e /usr/local/include/zstd.h; fi
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e /usr/local/lib/libzstd.a; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e /usr/local/lib/libzstd.so; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e /usr/local/lib/libzstd.dylib; fi
 
 notifications:
   email:
