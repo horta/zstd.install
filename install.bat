@@ -7,7 +7,7 @@ call :joinpath "%ORIGIN%" "install.log"
 SET LOG_FILE=%Result%
 
 :: Configuration
-set VERSION=1.3.3
+set VERSION=1.4.3
 set FILE=zstd-%VERSION%.zip
 set DIR=zstd-%VERSION%
 set URL=https://github.com/facebook/zstd/archive/v%VERSION%.zip
