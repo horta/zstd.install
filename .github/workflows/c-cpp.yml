@@ -17,6 +17,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install
-      run: bash -c "$(curl -fsSL https://raw.githubusercontent.com/horta/zstd.install/main/install)"
+      run: sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/horta/zstd.install/main/install)"
     - name: Check
       run: ls
