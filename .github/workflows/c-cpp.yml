@@ -18,11 +18,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install
-      if: matrix.os != 'windows-latest'
       shell: bash
-      run: sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/horta/zstd.install/main/install)"
-
-    - name: Install
-      if: matrix.os == 'windows-latest'
-      shell: bash
-      run: bash -c "$(curl -fsSL https://raw.githubusercontent.com/horta/zstd.install/main/install)"
+      run: |
+        if type sudo >/dev/null 2>&1; then SUDO="sudo"; else SUDO=""; fi
+        $SUDO bash -c "$(curl -fsSL https://raw.githubusercontent.com/horta/zstd.install/main/install)"
