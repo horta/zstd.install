@@ -12,11 +12,11 @@ jobs:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Install
+      shell: bash
       run: sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/horta/zstd.install/main/install)"
-    - name: Check
-      run: ls
