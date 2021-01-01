@@ -89,26 +89,30 @@ function succeeded
     rm -rf "$LOGFILE" >/dev/null 2>&1 || true
 }
 
-echo "[0/5] Library(zstd==$VERSION)"
+echo "[0/6] Library(zstd==$VERSION)"
 cd $TMPDIR
 
-echo -n "[1/5] Downloading... "
+echo -n "[1/6] Downloading... "
 silent_run curl -o $FILE -L $URL
 [ $? == 0 ] && echo "done." || failed
 
-echo -n "[2/5] Extracting... "
-silent_run tar xzf $FILE && silent_run cd $DIR
+echo -n "[2/6] Extracting... "
+silent_run tar xzf $FILE && mkdir $DIR/build/cmake/build && silent_run cd $DIR/build/cmake/build
 [ $? == 0 ] && echo "done." || failed
 
-echo -n "[3/5] Compiling... "
-silent_run make
+echo -n "[3/6] Configuring... "
+silent_run cmake -DCMAKE_BUILD_TYPE=Release ..
 [ $? == 0 ] && echo "done." || failed
 
-echo -n "[4/5] Installing... "
-make install
+echo -n "[4/6] Compiling... "
+silent_run cmake --build . --config Release
 [ $? == 0 ] && echo "done." || failed
 
-echo -n "[5/5] Finalizing... "
+echo "[5/6] Installing..."
+cmake --build . --config Release --target install
+[ $? == 0 ] && echo "done." || failed
+
+echo -n "[6/6] Finalizing... "
 silent_run run_ldconfig
 [ $? == 0 ] && echo "done." || failed
 
