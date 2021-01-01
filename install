@@ -69,6 +69,23 @@ function run_ldconfig
     fi
 }
 
+function is_unix
+{
+    case "$(uname -s)" in
+        Linux*)     return 0;;
+        Darwin*)    return 0;;
+        *)          return 1
+    esac
+}
+if is_unix; then
+    GENERATOR=""
+else
+    if [ -z ${ARCH+x} ]; then
+        ARCH="x64"
+    fi
+    GENERATOR="-DCMAKE_GENERATOR_PLATFORM=$ARCH"
+fi
+
 function failed
 {
     exec 3>&-
@@ -101,7 +118,7 @@ silent_run tar xzf $FILE && mkdir $DIR/build/cmake/build && silent_run cd $DIR/b
 [ $? == 0 ] && echo "done." || failed
 
 echo -n "[3/6] Configuring... "
-silent_run cmake -DCMAKE_BUILD_TYPE=Release ..
+silent_run cmake -DCMAKE_BUILD_TYPE=Release $GENERATOR ..
 [ $? == 0 ] && echo "done." || failed
 
 echo -n "[4/6] Compiling... "
