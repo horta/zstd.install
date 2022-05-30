@@ -77,13 +77,17 @@ function is_unix
         *)          return 1
     esac
 }
-if is_unix; then
-    GENERATOR=""
+
+if [ -z ${CMAKE_GENERATOR_PLATFORM+x} ]; then
+    GENERATOR_PLATFORM_ARG=
 else
-    if [ -z ${ARCH+x} ]; then
-        ARCH="x64"
+    if is_unix; then
+        CMAKE_GENERATOR_PLATFORM=${CMAKE_GENERATOR_PLATFORM:-}
+    else
+        ARCH=${ARCH:-x64}
+        CMAKE_GENERATOR_PLATFORM=${CMAKE_GENERATOR_PLATFORM:-$ARCH}
     fi
-    GENERATOR="-DCMAKE_GENERATOR_PLATFORM=$ARCH"
+    GENERATOR_PLATFORM_ARG="-DCMAKE_GENERATOR_PLATFORM:STRING=$CMAKE_GENERATOR_PLATFORM"
 fi
 
 function failed
@@ -118,7 +122,8 @@ silent_run tar xzf $FILE && mkdir $DIR/build/cmake/build && silent_run cd $DIR/b
 [ $? == 0 ] && echo "done." || failed
 
 echo -n "[3/6] Configuring... "
-silent_run cmake -DCMAKE_BUILD_TYPE=Release $GENERATOR ..
+silent_run cmake -DCMAKE_BUILD_TYPE=Release $GENERATOR_PLATFORM_ARG ..
+
 [ $? == 0 ] && echo "done." || failed
 
 echo -n "[4/6] Compiling... "
