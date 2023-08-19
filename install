@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=1.5.2
+VERSION=1.5.5
 FILE=zstd-$VERSION.tar.gz
 DIR=zstd-$VERSION
 URL=https://github.com/facebook/zstd/archive/v$VERSION.tar.gz
